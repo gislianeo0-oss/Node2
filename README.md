@@ -1,4 +1,9 @@
-Projeto desenvolvido no curso 
+Projeto desenvolvido em sala de aula no curso Técnico de Informática para Internet - Turma 15
 
--> Para iniciar no terminal 
-npm init
+-> Para inicializar no terminal
+
+Criar o package.json npm init npm init -y (cria com todas as opções de configuração confirmadas)
+
+Criar o package-lock.json npm install
+
+Instalar as dependências do framework Express npm install express
