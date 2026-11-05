@@ -13,12 +13,22 @@ app.get("/:nome", (requisicao, resposta) => {
   const nomeInformado = requisicao.params.nome.toLowerCase();
   const pet = pets.find((infoPet) => infoPet.nome === nomeInformado);
 
+  if (pet === undefined) {
+    resposta.status(404).send("Não existe o Pet informado.");
+  }
+
   resposta.send(pet);
 });
 
 app.put("/:nome", (req, res) => {
   const nomeInformado = req.params.nome.toLowerCase();
   const nomeSelecionado = pets.find((pet) => pet.nome === nomeInformado);
+
+  if (!nomeSelecionado) {
+    res.status(404).send("Não existe o Pet informado.");
+    return;
+  }
+
   const campos = Object.keys(req.body);
 
   for (let campo of campos) {
@@ -30,15 +40,15 @@ app.put("/:nome", (req, res) => {
 app.post("/", (req, res) => {
   const novoPet = req.body;
   pets.push(novoPet);
-  res.status(201).send(novoPet);
+  res.status(200).send(novoPet);
 });
 
-app.delete("/", (req, res) => {
+app.delete("/:nome", (req, res) => {
   const nomeInformado = req.params.nome.toLowerCase();
-  const indicePetSelecionaonado = pets.findIndex(
+  const indicePetSelecionado = pets.findIndex(
     (pet) => pet.nome === nomeInformado,
   );
-  const petRemovido = pets.splice(indicePetSelecionaonado, 1);
+  const petRemovido = pets.splice(indicePetSelecionado, 1);
   res.status(200).send(petRemovido);
 });
 
